@@ -1,17 +1,25 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.*;
 
-public class Recipe {
-    public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(new BufferedReader(new FileReader("recipe.txt")))) {
-            while (scanner.hasNextLine()) {
-                System.out.println(scanner);
+class Recipe implements Serializable{
+    private String recipeName;
+
+    public Recipe(String recipeName) {
+        this.recipeName = recipeName;
+    }
+    public static void main(String[] args) throws Exception{
+        ObjectOutputStream saveFavourites = null;
+        boolean isFavourite = false;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\USER\\IdeaProjects\\nutritionApp\\src\\recipe.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line); // display each line to the console
+
+                }
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+        Recipe favouriteRecipe = new Recipe("Crock Pot Roast");
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("favourite_recipe.txt"))){
+            outputStream.writeObject(favouriteRecipe);
         }
     }
 
